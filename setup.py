@@ -8,4 +8,7 @@ setup(name='iribaker',
       author_email='rinke.hoekstra@vu.nl',
       license='MIT',
       packages=['iribaker'],
+      install_requires=[
+          'rfc3987',
+      ],
       zip_safe=False)
