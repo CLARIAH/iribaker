@@ -4,7 +4,7 @@ Simple library for baking RFC3987 compliant IRIs from IRI-like strings.
 
 #### Installation
 
-Run `python setup.py`
+Run `python setup.py install`
 
 #### Usage
 
