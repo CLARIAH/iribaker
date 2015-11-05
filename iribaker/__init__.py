@@ -51,8 +51,10 @@ def to_iri(iri):
 
         # Replace the invalid characters with an underscore (no need to roundtrip)
         quoted_parts['path'] = no_invalid_characters.sub(u'_', parts.path)
-        quoted_parts['fragment'] = no_invalid_characters.sub(u'_', parts.fragment)
-        quoted_parts['query'] = urllib.quote(parts.query.encode('utf-8'))
+        if parts.fragment:
+            quoted_parts['fragment'] = no_invalid_characters.sub(u'_', parts.fragment)
+        if parts.query:
+            quoted_parts['query'] = urllib.quote(parts.query.encode('utf-8'))
         # Leave these untouched
         quoted_parts['scheme'] = parts.scheme
         quoted_parts['authority'] = parts.netloc
