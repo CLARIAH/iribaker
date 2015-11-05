@@ -4,7 +4,9 @@ Simple library for baking RFC3987 compliant IRIs from IRI-like strings.
 
 #### Installation
 
-Run `python setup.py install`
+Simply do `pip install iribaker`
+
+Or, download this package and run `python setup.py install`
 
 #### Usage
 
