@@ -36,11 +36,14 @@ def to_iri(iri):
             # If there is no scheme (e.g. http) nor a net location (e.g.
             # example.com) then we cannot do anything
             logger.error("The argument you provided does not comply with "
-                         "RFC 3987 and is not parseable as a IRI")
+                         "RFC 3987 and is not parseable as a IRI"
+                         "(there is no scheme or no net location part)")
             logger.error(iri)
-            raise Exception("""The argument you provided does not comply with
-                            RFC 3987 and is not parseable as a IRI""")
+            raise Exception("The argument you provided does not comply with"
+                            "RFC 3987 and is not parseable as a IRI"
+                            "(there is no scheme or no net location part)")
 
+        logger.debug("The IRI contains all necessary parts (scheme + net location)")
         quoted_parts = {}
         # We'll now convert the path, query and fragment parts of the URI
 
