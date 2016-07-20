@@ -18,7 +18,7 @@ def to_iri(iri):
     # First decode the IRI if needed
     if not isinstance(iri, unicode):
         logger.debug("Converting IRI to unicode")
-        iri = iri.decode('utf-8')
+        iri = iri.decode('utf-8').strip()
 
     try:
         # If we can safely parse the URI, then we don't
