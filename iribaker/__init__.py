@@ -1,6 +1,9 @@
 import urllib
 import rfc3987
-import urlparse
+try:
+    import urlparse
+except:
+    import urllib.parse as urlparse
 import logging
 
 logger = logging.getLogger(__name__)
