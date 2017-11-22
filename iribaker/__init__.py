@@ -1,5 +1,6 @@
 import urllib
 import rfc3987
+import sys
 try:
     import urlparse
 except:
@@ -18,10 +19,11 @@ def to_iri(iri):
     Safely quotes an IRI in a way that is resilient to unicode and incorrect
     arguments (checks for RFC 3987 compliance and falls back to percent encoding)
     """
-    # First decode the IRI if needed
-    if not isinstance(iri, unicode):
-        logger.debug("Converting IRI to unicode")
-        iri = iri.decode('utf-8')
+    # First decode the IRI if needed (python 2)
+    if sys.version_info[0] < 3:
+        if not isinstance(iri, unicode):
+            logger.debug("Converting IRI to unicode")
+            iri = iri.decode('utf-8')
 
     try:
         # If we can safely parse the URI, then we don't
