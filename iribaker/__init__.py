@@ -19,12 +19,6 @@ def to_iri(iri):
     Safely quotes an IRI in a way that is resilient to unicode and incorrect
     arguments (checks for RFC 3987 compliance and falls back to percent encoding)
     """
-    # First decode the IRI if needed (python 2)
-    if sys.version_info[0] < 3:
-        if not isinstance(iri, unicode):
-            logger.debug("Converting IRI to unicode")
-            iri = iri.decode('utf-8')
-
     try:
         # If we can safely parse the URI, then we don't
         # need to do anything special here
@@ -62,7 +56,7 @@ def to_iri(iri):
         if parts.fragment:
             quoted_parts['fragment'] = no_invalid_characters.sub(u'_', parts.fragment)
         if parts.query:
-            quoted_parts['query'] = urllib.quote(parts.query.encode('utf-8'),safe="&=")
+            quoted_parts['query'] = urllib.parse.quote(parts.query.encode('utf-8'),safe="&=")
         # Leave these untouched
         quoted_parts['scheme'] = parts.scheme
         quoted_parts['authority'] = parts.netloc
@@ -76,6 +70,6 @@ def to_iri(iri):
             # urllib percent quoting (but this is ugly!)
             logger.warning('Could not safely quote as IRI, falling back to '
                            'percent encoding')
-            quoted_iri = urllib.quote(iri.encode('utf-8'))
+            quoted_iri = urllib.parse.quote(iri.encode('utf-8'))
 
         return quoted_iri
