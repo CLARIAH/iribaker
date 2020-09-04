@@ -1,10 +1,6 @@
-import urllib
+import urllib.parse
 import rfc3987
 import sys
-try:
-    import urlparse
-except:
-    import urllib.parse as urlparse
 import logging
 
 logger = logging.getLogger(__name__)
@@ -30,7 +26,7 @@ def to_iri(iri):
         logger.debug("The IRI is not valid, proceeding to quote...")
         # First see whether we can actually parse it *as if* it is a URI
 
-        parts = urlparse.urlsplit(iri)
+        parts = urllib.parse.urlsplit(iri)
         if not parts.scheme or not parts.netloc:
             # If there is no scheme (e.g. http) nor a net location (e.g.
             # example.com) then we cannot do anything
@@ -52,9 +48,9 @@ def to_iri(iri):
         no_invalid_characters = rfc3987.get_compiled_pattern("(?!%(iunreserved)s|%(pct_encoded)s|%(sub_delims)s|:|@|/)(.)")
 
         # Replace the invalid characters with an underscore (no need to roundtrip)
-        quoted_parts['path'] = no_invalid_characters.sub(u'_', parts.path)
+        quoted_parts['path'] = no_invalid_characters.sub('_', parts.path)
         if parts.fragment:
-            quoted_parts['fragment'] = no_invalid_characters.sub(u'_', parts.fragment)
+            quoted_parts['fragment'] = no_invalid_characters.sub('_', parts.fragment)
         if parts.query:
             quoted_parts['query'] = urllib.parse.quote(parts.query.encode('utf-8'),safe="&=")
         # Leave these untouched
