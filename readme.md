@@ -4,7 +4,7 @@ Simple library for baking RFC3987 compliant IRIs from IRI-like strings.
 
 #### Installation
 
-Simply do `pip install iribaker`
+Simply do `pip3 install iribaker`
 
 Or, download this package and run `python setup.py install`
 
@@ -16,7 +16,7 @@ Or, download this package and run `python setup.py install`
 * The function returns:
   * The same (unicode) string, if it is a valid IRI
   * A string where each invalid character is replaced with an underscore (`_`). This means no roundtripping!
-  * A quoted version of the string (using the standard `urllib.quote`)
+  * A quoted version of the string (using the standard `urllib.parse.quote`)
 
 #### License
 
